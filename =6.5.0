@@ -1,0 +1,19 @@
+Collecting PySide6
+  Downloading pyside6-6.11.1-cp310-abi3-win_amd64.whl.metadata (5.5 kB)
+Collecting shiboken6==6.11.1 (from PySide6)
+  Downloading shiboken6-6.11.1-cp310-abi3-win_amd64.whl.metadata (2.5 kB)
+Collecting PySide6_Essentials==6.11.1 (from PySide6)
+  Downloading pyside6_essentials-6.11.1-cp310-abi3-win_amd64.whl.metadata (3.8 kB)
+Collecting PySide6_Addons==6.11.1 (from PySide6)
+  Downloading pyside6_addons-6.11.1-cp310-abi3-win_amd64.whl.metadata (4.2 kB)
+Downloading pyside6-6.11.1-cp310-abi3-win_amd64.whl (578 kB)
+   ---------------------------------------- 578.4/578.4 kB 8.3 MB/s  0:00:00
+Downloading pyside6_addons-6.11.1-cp310-abi3-win_amd64.whl (168.8 MB)
+   ---------------------------------------- 168.8/168.8 MB 34.1 MB/s  0:00:04
+Downloading pyside6_essentials-6.11.1-cp310-abi3-win_amd64.whl (77.5 MB)
+   ---------------------------------------- 77.5/77.5 MB 27.5 MB/s  0:00:02
+Downloading shiboken6-6.11.1-cp310-abi3-win_amd64.whl (1.2 MB)
+   ---------------------------------------- 1.2/1.2 MB 25.8 MB/s  0:00:00
+Installing collected packages: shiboken6, PySide6_Essentials, PySide6_Addons, PySide6
+
+Successfully installed PySide6-6.11.1 PySide6_Addons-6.11.1 PySide6_Essentials-6.11.1 shiboken6-6.11.1

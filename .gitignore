@@ -1,0 +1,21 @@
+# PyInstaller build artifacts
+build/
+dist/
+*.spec
+
+# Auto-generated files
+version.txt
+src/build_info.py
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
