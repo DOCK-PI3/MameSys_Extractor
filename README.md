@@ -5,8 +5,9 @@ colección de ROMs de MAME.
 
 MameSys Extractor permite copiar rápidamente sistemas como **Neo Geo, CPS-1,
 CPS-2, CPS-3, Atomiswave, NAOMI y NAOMI 2**, explorar categorías mediante
-`catver.ini` o archivos DAT, y extraer selecciones personalizadas desde listas
-XML, TXT o INI.
+`catver.ini` o archivos DAT, extraer selecciones personalizadas desde listas
+XML, TXT o INI, y copiar ficheros de cualquier sistema retro usando una lista
+TXT con nombres sin extensión.
 
 ![Pantalla principal de MameSys Extractor](images-app/extraccion-rapida.png)
 
@@ -20,6 +21,7 @@ XML, TXT o INI.
 - Carga de sistemas desde archivos DAT de clrmamepro.
 - Extracción mediante listas personalizadas `.xml`, `.txt`, `.ini`, `.dat` o
   `.cfg`.
+- Pestaña universal para consolas retro, PC retro y ficheros generales.
 - Selección individual de categorías incluidas en archivos INI.
 - Registro de actividad, barra de progreso y cancelación de operaciones.
 - Exportación de la lista de ROMs no encontradas.
@@ -61,6 +63,10 @@ La aplicación solo copia los sets que encuentre en la carpeta de origen.
 ### Selección de categorías detectadas
 
 ![Categorías detectadas](images-app/categorias-detectadas.png)
+
+### Copia universal por TXT
+
+![Copia universal por TXT](images-app/universal-txt.png)
 
 ## Guía de uso
 
@@ -116,6 +122,32 @@ Cada archivo DAT válido se mostrará como un sistema seleccionable.
 
 Las listas de texto pueden contener un nombre de ROM por línea, con o sin la
 extensión `.zip` o `.7z`.
+
+### 5. Copiar cualquier sistema con Universal TXT
+
+Esta pestaña sirve para consolas retro, ordenadores clásicos, PC retro o
+cualquier carpeta con ficheros generales.
+
+1. Abre la pestaña **Universal TXT**.
+2. Selecciona la carpeta origen donde están los archivos.
+3. Selecciona un archivo `.txt` con un nombre por línea.
+4. Selecciona la carpeta destino.
+5. Opcionalmente marca **Buscar también en subcarpetas**.
+6. Pulsa **Analizar TXT**.
+7. Pulsa **Copiar ficheros a destino**.
+
+El TXT debe usar el nombre base del archivo, sin extensión. Ejemplo:
+
+```text
+sonic 2 (usa)
+Another World (Europe)
+Doom Shareware v1.9
+```
+
+Si en la carpeta origen existe `sonic 2 (usa).zip`, la aplicación lo copiará al
+destino aunque en el TXT no aparezca `.zip`. También funciona con otras
+extensiones como `.7z`, `.bin`, `.cue`, `.iso`, `.chd`, `.nes`, `.sfc`, `.gba`,
+`.exe` y, en general, cualquier archivo cuyo nombre base coincida.
 
 ## Instalación
 
@@ -173,8 +205,10 @@ de ROMs seleccionado.
 - En romsets **merged**, muchos clones están incluidos dentro del ZIP del juego
   padre. Por ello, el número de archivos encontrados puede ser menor que el
   número total de sets mostrado en una lista.
-- Para obtener mejores resultados, usa listas compatibles con la versión de tu
-  romset.
+- Para obtener mejores resultados en MAME, usa listas compatibles con la
+  versión de tu romset.
+- En la pestaña **Universal TXT**, si varios archivos tienen el mismo nombre
+  base y distinta extensión, se copiarán todas las coincidencias.
 
 ## Tecnología
 

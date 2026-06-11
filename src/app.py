@@ -1,9 +1,11 @@
 """
 Ventana principal de MameSys Extractor.
 
-Aplicación con interfaz de pestañas para gestionar ROMs de MAME:
-- Pestaña 1: Extractor por Sistemas (usa catver.ini)
-- Pestaña 2: Limpiador con lista XML/Texto
+Aplicación con interfaz de pestañas para gestionar ROMs:
+- Extracción rápida de sistemas MAME conocidos
+- Exploración de sistemas MAME mediante catver.ini/.DAT
+- Limpieza con listas XML/Texto
+- Copia universal para sistemas retro y ficheros generales
 """
 
 import sys
@@ -20,6 +22,7 @@ from PySide6.QtCore import Qt
 from src.tabs.system_extractor import SystemExtractorTab
 from src.tabs.xml_cleaner import XmlCleanerTab
 from src.tabs.quick_extractor import QuickExtractorTab
+from src.tabs.universal_extractor import UniversalExtractorTab
 
 try:
     from src.build_info import BUILD_DATE, BUILD_VERSION
@@ -31,7 +34,7 @@ except ImportError:
 class MainWindow(QMainWindow):
     """Ventana principal con pestañas."""
     
-    VERSION = "1.1.0"
+    VERSION = "1.2.0"
     BUILD_DATE = BUILD_DATE
     WINDOW_TITLE = "MameSys Extractor"
     WINDOW_WIDTH = 1180
@@ -67,7 +70,7 @@ class MainWindow(QMainWindow):
         title_column.addWidget(title_label)
         
         subtitle_label = QLabel(
-            "Organiza y extrae sistemas completos desde tu colección de MAME."
+            "Organiza y extrae sistemas completos de MAME, consolas retro y ficheros generales."
         )
         subtitle_label.setWordWrap(True)
         subtitle_label.setObjectName("headerSubtitle")
@@ -90,10 +93,12 @@ class MainWindow(QMainWindow):
         self.quick_tab = QuickExtractorTab()
         self.system_tab = SystemExtractorTab()
         self.xml_tab = XmlCleanerTab()
+        self.universal_tab = UniversalExtractorTab()
         
         self.tabs.addTab(self.quick_tab, "Extracción rápida")
         self.tabs.addTab(self.system_tab, "Explorar sistemas")
         self.tabs.addTab(self.xml_tab, "Extraer con lista")
+        self.tabs.addTab(self.universal_tab, "Universal TXT")
         
         main_layout.addWidget(self.tabs, 1)
         self._link_shared_paths()
@@ -120,7 +125,7 @@ class MainWindow(QMainWindow):
             "Acerca de MameSys Extractor",
             f"<h2 style='color:#f8fafc;margin-bottom:12px;'>MameSys Extractor</h2>"
             f"<p style='color:#cbd5e1;font-size:13px;'>"
-            f"Gestor de ROMs de MAME — organiza, extrae y limpia tu romset.<br><br>"
+            f"Gestor de ROMs y ficheros retro — organiza, extrae y limpia tus colecciones.<br><br>"
             f"<b>Versión:</b> {BUILD_VERSION}<br>"
             f"<b>Build:</b> {BUILD_DATE}<br>"
             f"<b>Autor:</b> mabedeep Emulos Team<br>"
@@ -136,11 +141,12 @@ class MainWindow(QMainWindow):
         self.system_tab.save_settings()
         self.xml_tab.save_settings()
         self.quick_tab.save_settings()
+        self.universal_tab.save_settings()
         super().closeEvent(event)
 
     def _link_shared_paths(self):
         """Mantiene las carpetas origen/destino sincronizadas entre pestañas."""
-        tabs = (self.quick_tab, self.system_tab, self.xml_tab)
+        tabs = (self.quick_tab, self.system_tab, self.xml_tab, self.universal_tab)
 
         for source_tab in tabs:
             for target_tab in tabs:
@@ -269,6 +275,11 @@ def _apply_stylesheet(app: QApplication):
     }
     QPushButton#primaryButton:hover {
         background-color: #1d4ed8;
+    }
+    QPushButton#primaryButton:disabled {
+        background-color: #1e293b;
+        color: #64748b;
+        border-color: #334155;
     }
     QPushButton#dangerButton {
         background-color: #7f1d1d;
